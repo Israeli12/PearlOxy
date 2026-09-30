@@ -1,1 +1,110 @@
-# PearlOxy
+# PearlOxy Uganda Limited — Website
+
+Static marketing site for **PearlOxy Uganda Limited** (Kampala, Uganda) and its flagship
+**MPOS device** — Mobile Portable Oxygen Storage, a portable oxygen buffer designed to keep
+oxygen therapy running during power interruptions in low-resource hospitals.
+
+Nine pages, no build dependencies, no framework. Every section is written so it maps cleanly
+onto a native Elementor widget for the planned WordPress rebuild.
+
+---
+
+## Run it locally
+
+```bash
+python serve.py
+```
+
+Then open <http://localhost:5199>. The server adds `no-store` headers and resolves clean URLs
+(`/about/` → `about/index.html`), so a rebuild always shows up on reload.
+
+## Rebuild the pages
+
+```bash
+python build.py
+```
+
+`build.py` wraps each body partial in `src/` with the shared `<head>`, header and footer, then
+writes `index.html`, `<slug>/index.html`, `sitemap.xml` and `robots.txt`.
+
+**Edit `src/*.html`, not the generated `index.html` files** — a rebuild overwrites them.
+Shared markup (nav, footer, meta tags, JSON-LD) lives in `build.py`.
+
+The build asserts on every page that there is exactly one `<h1>` and that every `<img>` carries
+an `alt` attribute; it fails loudly rather than shipping a regression.
+
+---
+
+## Layout
+
+```
+├── build.py              page shell, SEO metadata, nav/footer, sitemap
+├── serve.py              local preview server
+├── src/*.html            page bodies (the files you edit)
+├── assets/css/main.css   design system — flexbox only, no CSS Grid
+├── assets/js/main.js     mobile menu, accordion, reveal, video facade, forms
+├── assets/img/           optimised imagery (≤1800px, JPEG for photos)
+├── content/              original unoptimised source assets
+└── <slug>/index.html     generated output
+```
+
+## Design system
+
+| Token | Value | Use |
+| --- | --- | --- |
+| `--navy` / `--navy-deep` | `#0A2540` / `#061829` | Headings, dark sections |
+| `--blue` | `#0B7FD4` | Primary actions, accents |
+| `--cyan` | `#22C7E0` | Highlights on dark |
+| `--sand` | `#F7F4EF` | Alternating section background |
+
+Display type is **Fraunces**; body and UI are **Inter**. Breakpoints: 480 / 768 / 992 / 1152 /
+1320. The navigation switches to a hamburger below 1152px, above the layout breakpoint, because
+nine items plus the brand and CTA need the extra room.
+
+## Elementor mapping
+
+| This site | Elementor widget |
+| --- | --- |
+| `.container`, `.row`, `.col-*` | Flex Container / Columns |
+| `.iconbox`, `.flow__step` | Icon Box |
+| `.card`, `.compare`, `.person` | Image Box / Icon Box |
+| `.accordion` | Accordion |
+| `.video` | Video (with image overlay) |
+| `.gallery` | Gallery |
+| `form[data-mailto-form]` | Form |
+| `.spec` | Text Editor table |
+
+No CSS Grid, canvas, WebGL or JS-driven layout is used anywhere.
+
+## Forms
+
+Static hosting has no form backend, so each form opens the visitor's mail client with every
+answer pre-filled, addressed to `cathybertainembabazi@gmail.com`. In the WordPress rebuild,
+replace each `<form data-mailto-form>` with an Elementor Form widget.
+
+Anchor links such as `/contact/#subject=Hospital%20Pilot` pre-select the form's Subject field.
+
+## Videos
+
+Two YouTube videos are embedded as click-to-play facades — a local poster image plus a play
+button — so nothing loads from YouTube until the visitor asks for it:
+
+- `U_c3C8_FDGk` — *The Problem: Up to 40% Child Pneumonia Deaths are preventable*
+- `SqK5JbHIvgY` — *The Solution: MPOS keeps the oxygen flowing during power blackouts*
+
+---
+
+## A note on the figures
+
+Numbers drawn from the PearlOxy pitch deck — the annual oxygen volume per unit and the figure
+of 224 children — are presented throughout as **company projections**, each labelled as such and
+accompanied by a disclosure that they are not independently verified medical evidence and have
+not been validated in clinical trials. Market sizes are likewise presented as PearlOxy's own
+stated estimates. Please keep that framing if you edit the copy.
+
+## Deploying
+
+Any static host works. For GitHub Pages, serve from the repository root on the default branch;
+relative links resolve correctly under the `/PearlOxy/` sub-path. If you deploy to a custom
+domain, update `SITE_URL` in `build.py` and re-run the build so canonicals, Open Graph URLs
+and the sitemap point at the live host.
