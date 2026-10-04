@@ -93,7 +93,7 @@ PAGES = [
         "title": "Contact PearlOxy Uganda Limited | Kampala, Uganda",
         "desc": "Contact PearlOxy Uganda Limited in Kampala about product enquiries, "
                 "hospital pilots, partnerships, distribution or investment.",
-        "og": "healthcare-worker-oxygen-therapy.jpg",
+        "og": "mpos-cylinder-fabrication-kampala.jpg",
         "h1": "Talk to PearlOxy",
     },
 ]
@@ -139,7 +139,7 @@ HEAD = """<!DOCTYPE html>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3CradialGradient id='g' cx='32%25' cy='30%25'%3E%3Cstop offset='0' stop-color='%237FE3F5'/%3E%3Cstop offset='.32' stop-color='%2322C7E0'/%3E%3Cstop offset='.64' stop-color='%230B7FD4'/%3E%3Cstop offset='1' stop-color='%23064F86'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='15' fill='url(%23g)'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..700,0..100,0..1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>document.documentElement.className+=' js';</script>
 <link rel="stylesheet" href="{root}assets/css/main.css">
 <script type="application/ld+json">{jsonld}</script>
@@ -152,8 +152,7 @@ HEADER = """<header class="site-header">
   <div class="container">
     <div class="header-inner">
       <a class="brand" href="{root}index.html" aria-label="PearlOxy Uganda Limited — home">
-        <span class="brand__mark" aria-hidden="true"></span>
-        <span class="brand__name">Pearl<em>Oxy</em></span>
+        <img src="{root}assets/img/pearloxy-logo-mark.png" alt="PearlOxy — The Future of Oxygen Storage" width="750" height="175">
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation menu">
         <span></span><span></span><span></span>
@@ -177,8 +176,7 @@ FOOTER = """</main>
     <div class="row row--gap">
       <div class="col-4 footer-about">
         <a class="brand" href="{root}index.html">
-          <span class="brand__mark" aria-hidden="true"></span>
-          <span class="brand__name">Pearl<em>Oxy</em></span>
+          <img src="{root}assets/img/pearloxy-logo-light.png" alt="PearlOxy — The Future of Oxygen Storage" width="750" height="175">
         </a>
         <p>Portable oxygen backup technology, locally built in Kampala, designed to keep
           oxygen therapy flowing when power fails.</p>

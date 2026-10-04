@@ -50,16 +50,42 @@ an `alt` attribute; it fails loudly rather than shipping a regression.
 
 ## Design system
 
-| Token | Value | Use |
-| --- | --- | --- |
-| `--navy` / `--navy-deep` | `#0A2540` / `#061829` | Headings, dark sections |
-| `--blue` | `#0B7FD4` | Primary actions, accents |
-| `--cyan` | `#22C7E0` | Highlights on dark |
-| `--sand` | `#F7F4EF` | Alternating section background |
+The palette is sampled directly from the PearlOxy logo — a single cobalt hue across many
+values, with no second accent colour. Depth and light do the work instead of hue variety.
 
-Display type is **Fraunces**; body and UI are **Inter**. Breakpoints: 480 / 768 / 992 / 1152 /
-1320. The navigation switches to a hamburger below 1152px, above the layout breakpoint, because
-nine items plus the brand and CTA need the extra room.
+| Token | Value | Sampled from | Use |
+| --- | --- | --- | --- |
+| `--ink` | `#0C1330` | Sphere shadow | Dark bands, headings |
+| `--cobalt` | `#0A3591` | Wordmark | Primary actions, accents |
+| `--cobalt-lit` | `#0D36AA` | Sphere core | Gradient mesh |
+| `--blue` | `#2E5FD4` | — | Interactive / hover |
+| `--sky` | `#9FC6F1` | Sphere highlight | Glow, accents on dark |
+| `--ivory` | `#FBFAF7` | — | Page background |
+| `--ivory-2` | `#F4F1EA` | — | Alternating sections |
+
+The site is light-dominant: ivory throughout, with deep cobalt bands used sparingly as
+punctuation (the Problem section, impact quote, funding, footer and sub-page heroes).
+
+Display type is **Fraunces** (variable, with the `WONK` axis on for distinctive letterforms);
+body and UI are **Inter**. Breakpoints: 480 / 768 / 992 / 1152 / 1320. Navigation switches to
+a hamburger below 1152px, above the layout breakpoint, because nine items plus the brand and
+CTA need the extra room.
+
+Visual devices, all pure CSS so they survive the Elementor rebuild: a fixed SVG film-grain
+overlay, radial-gradient meshes on dark bands, the logo's sphere enlarged as the hero light
+source, gradient-border feature cards, a scrolling marquee, staggered scroll reveals,
+count-up statistics and parallax-lite on the hero device.
+
+### Brand assets
+
+| File | Use |
+| --- | --- |
+| `pearloxy-logo.png` | Full logo with tagline, on light |
+| `pearloxy-logo-light.png` | Full logo with tagline, on dark — used in the footer |
+| `pearloxy-logo-mark.png` | Sphere + wordmark, no tagline — used in the header |
+| `pearloxy-logo-mark-light.png` | Same, knocked out white for dark backgrounds |
+
+The tagline is illegible below about 60px tall, which is why the header uses the mark.
 
 ## Elementor mapping
 
@@ -93,6 +119,22 @@ button — so nothing loads from YouTube until the visitor asks for it:
 - `SqK5JbHIvgY` — *The Solution: MPOS keeps the oxygen flowing during power blackouts*
 
 ---
+
+## Imagery
+
+Photographs of the team, the workshop and the device are PearlOxy's own and are used
+throughout in preference to stock.
+
+**Two stock files from `content/` are deliberately not used on the site:**
+
+- `african-american-boy-patient-...-2MMY4NF.jpg` carries visible **Alamy watermarks** — it is
+  an unlicensed comp. A de-watermarked copy of the same scene exists in `content/` as
+  `DeWatermark.ai_1758032642689.jpeg`; licensing it properly is still worth doing.
+- `istockphoto-2187445730-1024x1024.jpg` shows a man presenting a data chart, not a clinician,
+  so it was replaced with PearlOxy's own workshop photography.
+
+Before launch, confirm the licence for every remaining stock image: the `istockphoto-*` and
+`freepik`-derived files in `content/` came in at preview sizes.
 
 ## A note on the figures
 

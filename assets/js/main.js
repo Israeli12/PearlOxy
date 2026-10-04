@@ -73,6 +73,27 @@
     });
   });
 
+  var reduceMotion = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- 2b. Header gains a hairline once the page moves ---------- */
+  var header = document.querySelector('.site-header');
+  if (header) {
+    var syncHeader = function () {
+      header.classList.toggle('is-stuck', window.scrollY > 8);
+    };
+    syncHeader();
+    window.addEventListener('scroll', syncHeader, { passive: true });
+  }
+
+  /* ---------- 2c. Stagger siblings inside a revealed row ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll('.row.reveal'), function (row) {
+    var kids = row.children;
+    for (var i = 0; i < kids.length; i++) {
+      kids[i].style.setProperty('--d', (i % 4) * 90 + 'ms');
+    }
+  });
+
   /* ---------- 3. Scroll reveal ---------- */
   var revealTargets = document.querySelectorAll('.reveal');
   if (!('IntersectionObserver' in window)) {
@@ -93,6 +114,79 @@
     window.setTimeout(function () {
       Array.prototype.forEach.call(revealTargets, function (el) { el.classList.add('is-visible'); });
     }, 2500);
+  }
+
+  /* ---------- 3b. Count-up on stat figures ----------
+     Reads the figure already in the markup, so the number stays correct with
+     JavaScript off and nothing has to be duplicated in a data attribute.    */
+  var animateCount = function (el) {
+    if (el.dataset.counted) return;
+    // Only the element's own text, so a trailing <small> unit is left alone.
+    var textNode = null;
+    for (var i = 0; i < el.childNodes.length; i++) {
+      if (el.childNodes[i].nodeType === 3 && /\d/.test(el.childNodes[i].nodeValue)) {
+        textNode = el.childNodes[i];
+        break;
+      }
+    }
+    if (!textNode) return;
+    var match = textNode.nodeValue.match(/^(\D*)([\d,]+)(\D*)$/);
+    if (!match) return;
+    var prefix = match[1], suffix = match[3];
+    var grouped = match[2].indexOf(',') !== -1;
+    var target = parseInt(match[2].replace(/,/g, ''), 10);
+    if (!isFinite(target) || target < 3) return;
+
+    el.dataset.counted = '1';
+    var format = function (n) {
+      return grouped ? n.toLocaleString('en-US') : String(n);
+    };
+    if (reduceMotion) return;
+
+    var duration = 1500, start = null;
+    var step = function (ts) {
+      if (start === null) start = ts;
+      var p = Math.min((ts - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      textNode.nodeValue = prefix + format(Math.round(target * eased)) + suffix;
+      if (p < 1) window.requestAnimationFrame(step);
+      else textNode.nodeValue = prefix + format(target) + suffix;
+    };
+    textNode.nodeValue = prefix + format(0) + suffix;
+    window.requestAnimationFrame(step);
+    // rAF is paused in background tabs; make sure the real figure always lands.
+    window.setTimeout(function () {
+      textNode.nodeValue = prefix + format(target) + suffix;
+    }, duration + 1200);
+  };
+
+  if ('IntersectionObserver' in window) {
+    var countObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        animateCount(entry.target);
+        countObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.6 });
+    Array.prototype.forEach.call(document.querySelectorAll('.stat__num'), function (el) {
+      countObserver.observe(el);
+    });
+  }
+
+  /* ---------- 3c. Parallax-lite on the hero device ---------- */
+  var heroArt = document.querySelector('.hero__media img');
+  if (heroArt && !reduceMotion) {
+    var ticking = false;
+    var shift = function () {
+      var y = window.scrollY;
+      if (y < 900) heroArt.style.transform = 'translate3d(0,' + (y * 0.07) + 'px,0)';
+      ticking = false;
+    };
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(shift);
+    }, { passive: true });
   }
 
   /* ---------- 4. Video facade — loads YouTube only on click ---------- */
