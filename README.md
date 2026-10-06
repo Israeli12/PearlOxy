@@ -1,7 +1,7 @@
-# PearlOxy Uganda Limited — Website
+# PearlOxy Uganda Limited Website
 
 Static marketing site for **PearlOxy Uganda Limited** (Kampala, Uganda) and its flagship
-**MPOS device** — Mobile Portable Oxygen Storage, a portable oxygen buffer designed to keep
+**MPOS device**, Mobile Portable Oxygen Storage, a portable oxygen buffer designed to keep
 oxygen therapy running during power interruptions in low-resource hospitals.
 
 Nine pages, no build dependencies, no framework. Every section is written so it maps cleanly
@@ -27,7 +27,7 @@ python build.py
 `build.py` wraps each body partial in `src/` with the shared `<head>`, header and footer, then
 writes `index.html`, `<slug>/index.html`, `sitemap.xml` and `robots.txt`.
 
-**Edit `src/*.html`, not the generated `index.html` files** — a rebuild overwrites them.
+**Edit `src/*.html`, not the generated `index.html` files.** A rebuild overwrites them.
 Shared markup (nav, footer, meta tags, JSON-LD) lives in `build.py`.
 
 The build asserts on every page that there is exactly one `<h1>` and that every `<img>` carries
@@ -41,7 +41,7 @@ an `alt` attribute; it fails loudly rather than shipping a regression.
 ├── build.py              page shell, SEO metadata, nav/footer, sitemap
 ├── serve.py              local preview server
 ├── src/*.html            page bodies (the files you edit)
-├── assets/css/main.css   design system — flexbox only, no CSS Grid
+├── assets/css/main.css   design system, flexbox only
 ├── assets/js/main.js     mobile menu, accordion, reveal, video facade, forms
 ├── assets/img/           optimised imagery (≤1800px, JPEG for photos)
 ├── content/              original unoptimised source assets
@@ -50,7 +50,7 @@ an `alt` attribute; it fails loudly rather than shipping a regression.
 
 ## Design system
 
-The palette is sampled directly from the PearlOxy logo — a single cobalt hue across many
+The palette is sampled directly from the PearlOxy logo: a single cobalt hue across many
 values, with no second accent colour. Depth and light do the work instead of hue variety.
 
 | Token | Value | Sampled from | Use |
@@ -58,31 +58,51 @@ values, with no second accent colour. Depth and light do the work instead of hue
 | `--ink` | `#0C1330` | Sphere shadow | Dark bands, headings |
 | `--cobalt` | `#0A3591` | Wordmark | Primary actions, accents |
 | `--cobalt-lit` | `#0D36AA` | Sphere core | Gradient mesh |
-| `--blue` | `#2E5FD4` | — | Interactive / hover |
+| `--blue` | `#2E5FD4` | Mid tone | Interactive / hover |
 | `--sky` | `#9FC6F1` | Sphere highlight | Glow, accents on dark |
-| `--ivory` | `#FBFAF7` | — | Page background |
-| `--ivory-2` | `#F4F1EA` | — | Alternating sections |
+| `--ivory` | `#FBFAF7` | Neutral | Page background |
+| `--ivory-2` | `#F4F1EA` | Neutral | Alternating sections |
 
 The site is light-dominant: ivory throughout, with deep cobalt bands used sparingly as
 punctuation (the Problem section, impact quote, funding, footer and sub-page heroes).
 
-Display type is **Fraunces** (variable, with the `WONK` axis on for distinctive letterforms);
-body and UI are **Inter**. Breakpoints: 480 / 768 / 992 / 1152 / 1320. Navigation switches to
+Display type is **Source Serif 4** (Adobe, optical sizing on), body and UI are
+**IBM Plex Sans** (IBM). Both are open-source faces from working type foundries, chosen for
+authority rather than novelty. Breakpoints: 480 / 768 / 992 / 1152 / 1320. Navigation switches to
 a hamburger below 1152px, above the layout breakpoint, because nine items plus the brand and
 CTA need the extra room.
 
-Visual devices, all pure CSS so they survive the Elementor rebuild: a fixed SVG film-grain
-overlay, radial-gradient meshes on dark bands, the logo's sphere enlarged as the hero light
-source, gradient-border feature cards, a scrolling marquee, staggered scroll reveals,
-count-up statistics and parallax-lite on the hero device.
+Visual devices: a fixed SVG film-grain overlay, radial-gradient meshes on dark bands, the
+logo's sphere enlarged as the hero light source, gradient-border feature cards and a scrolling
+marquee. All pure CSS, so they survive the Elementor rebuild.
+
+## Motion
+
+Animation lives in `assets/js/animations.js` and uses **GSAP 3.12.5 with ScrollTrigger**, both
+loaded from cdnjs. It animates by CSS class and never by structure, so the markup stays plain
+containers and widgets: in Elementor you load the same two CDN scripts plus this file from
+Custom Code and it keeps working.
+
+What it does: a word-by-word masked rise on the hero headline, a staggered hero entrance,
+scroll reveals that cascade across a row's columns, count-up statistics, use-of-funds bars that
+fill on scroll, a process flow whose steps and arrows arrive in order, a timeline whose rule
+draws down as entries appear, parallax on the hero device and section imagery, and magnetic
+primary buttons on pointer devices.
+
+**Nothing is hidden by the stylesheet.** Every "before" state is applied at runtime with
+`gsap.set()`, so a blocked CDN, a script error or `prefers-reduced-motion` all leave the page
+rendering complete and static. A watchdog additionally checks whether the frame loop is
+actually running shortly after load; if almost no frames have been drawn, which happens in
+background tabs, some embedded webviews and on very low-power devices, it abandons the
+choreography and strips the inline styles so the finished page is simply there.
 
 ### Brand assets
 
 | File | Use |
 | --- | --- |
 | `pearloxy-logo.png` | Full logo with tagline, on light |
-| `pearloxy-logo-light.png` | Full logo with tagline, on dark — used in the footer |
-| `pearloxy-logo-mark.png` | Sphere + wordmark, no tagline — used in the header |
+| `pearloxy-logo-light.png` | Full logo with tagline, on dark. Used in the footer |
+| `pearloxy-logo-mark.png` | Sphere and wordmark, no tagline. Used in the header |
 | `pearloxy-logo-mark-light.png` | Same, knocked out white for dark backgrounds |
 
 The tagline is illegible below about 60px tall, which is why the header uses the mark.
@@ -112,11 +132,11 @@ Anchor links such as `/contact/#subject=Hospital%20Pilot` pre-select the form's 
 
 ## Videos
 
-Two YouTube videos are embedded as click-to-play facades — a local poster image plus a play
-button — so nothing loads from YouTube until the visitor asks for it:
+Two YouTube videos are embedded as click-to-play facades, a local poster image plus a play
+button, so nothing loads from YouTube until the visitor asks for it:
 
-- `U_c3C8_FDGk` — *The Problem: Up to 40% Child Pneumonia Deaths are preventable*
-- `SqK5JbHIvgY` — *The Solution: MPOS keeps the oxygen flowing during power blackouts*
+- `U_c3C8_FDGk`, *The Problem: Up to 40% Child Pneumonia Deaths are preventable*
+- `SqK5JbHIvgY`, *The Solution: MPOS keeps the oxygen flowing during power blackouts*
 
 ---
 
@@ -127,7 +147,7 @@ throughout in preference to stock.
 
 **Two stock files from `content/` are deliberately not used on the site:**
 
-- `african-american-boy-patient-...-2MMY4NF.jpg` carries visible **Alamy watermarks** — it is
+- `african-american-boy-patient-...-2MMY4NF.jpg` carries visible **Alamy watermarks**. It is
   an unlicensed comp. A de-watermarked copy of the same scene exists in `content/` as
   `DeWatermark.ai_1758032642689.jpeg`; licensing it properly is still worth doing.
 - `istockphoto-2187445730-1024x1024.jpg` shows a man presenting a data chart, not a clinician,
@@ -138,8 +158,8 @@ Before launch, confirm the licence for every remaining stock image: the `istockp
 
 ## A note on the figures
 
-Numbers drawn from the PearlOxy pitch deck — the annual oxygen volume per unit and the figure
-of 224 children — are presented throughout as **company projections**, each labelled as such and
+Numbers drawn from the PearlOxy pitch deck, the annual oxygen volume per unit and the figure
+of 224 children, are presented throughout as **company projections**, each labelled as such and
 accompanied by a disclosure that they are not independently verified medical evidence and have
 not been validated in clinical trials. Market sizes are likewise presented as PearlOxy's own
 stated estimates. Please keep that framing if you edit the copy.

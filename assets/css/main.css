@@ -1,15 +1,15 @@
 /* ==========================================================================
-   PearlOxy Uganda Limited — main.css
+   PearlOxy Uganda Limited: main.css
    Palette sampled from the PearlOxy logo: a single cobalt hue, many values.
-   Light-dominant with deep cobalt bands. Flexbox only — no CSS Grid.
+   Light-dominant with deep cobalt bands. Flexbox only, no CSS Grid.
    ========================================================================== */
 
 /* ---------- 1. Tokens ---------- */
 :root{
-  /* Brand — straight off the logo */
+  /* Brand, straight off the logo */
   --ink:#0C1330;          /* sphere shadow, deepened */
   --ink-2:#0A1A42;
-  --cobalt:#0A3591;       /* wordmark — the brand blue */
+  --cobalt:#0A3591;       /* wordmark, the brand blue */
   --cobalt-deep:#072263;
   --cobalt-lit:#0D36AA;   /* sphere core */
   --blue:#2E5FD4;         /* interactive */
@@ -30,8 +30,8 @@
   --line-2:#D5DBE8;
   --line-dark:rgba(159,198,241,.18);
 
-  --serif:'Fraunces',Georgia,'Times New Roman',serif;
-  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --serif:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --sans:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
 
   --maxw:1240px;
   --gutter:22px;
@@ -58,7 +58,7 @@ body{
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
   overflow-x:hidden;
 }
-/* Film grain — fixed overlay, barely there, unifies photography and flat colour */
+/* Film grain: fixed overlay, barely there, unifies photography and flat colour */
 body::after{
   content:"";position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.038;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -78,19 +78,19 @@ table{border-collapse:collapse}
 /* ---------- 3. Type ---------- */
 h1,h2,h3,h4,h5,h6{
   font-family:var(--serif);color:var(--ink);margin:0 0 .48em;
-  font-weight:600;line-height:1.08;letter-spacing:-.025em;
-  font-variation-settings:'SOFT' 0,'WONK' 1;
+  font-weight:600;line-height:1.08;letter-spacing:-.022em;
+  font-optical-sizing:auto;
 }
 h1{
-  font-size:clamp(2.75rem,6.4vw,5.6rem);line-height:.98;letter-spacing:-.042em;
+  font-size:clamp(2.75rem,6.4vw,5.6rem);line-height:.98;letter-spacing:-.034em;
   font-weight:600;
 }
-h2{font-size:clamp(2rem,4.2vw,3.5rem);letter-spacing:-.034em;line-height:1.04}
-h3{font-size:clamp(1.3rem,2vw,1.7rem);letter-spacing:-.022em}
+h2{font-size:clamp(2rem,4.2vw,3.4rem);letter-spacing:-.028em;line-height:1.06}
+h3{font-size:clamp(1.28rem,1.9vw,1.62rem);letter-spacing:-.018em}
 h4{font-size:1.16rem;line-height:1.28}
 h5{font-size:1rem}
 
-/* Eyebrow with a leading rule — the editorial tell */
+/* Eyebrow with a leading rule, the editorial tell */
 .eyebrow{
   font-family:var(--sans);font-size:.7rem;font-weight:600;
   letter-spacing:.2em;text-transform:uppercase;color:var(--cobalt);
@@ -117,7 +117,7 @@ h5{font-size:1rem}
 .section--sand{background:var(--ivory-2)}
 .section--tint{background:var(--sky-wash)}
 
-/* Dark cobalt band — the "moments" in a light-dominant site */
+/* Dark cobalt band: the "moments" in a light-dominant site */
 .section--navy{
   background:var(--ink);color:rgba(230,238,252,.78);position:relative;overflow:hidden;
 }
@@ -295,7 +295,7 @@ h5{font-size:1rem}
   max-width:340px;max-height:580px;width:auto;height:auto;
   filter:drop-shadow(0 50px 70px rgba(12,19,48,.26));
 }
-/* The pearl — the logo's sphere, blown up as the light source */
+/* The pearl: the logo's sphere, blown up as the light source */
 .hero__glow{
   position:absolute;width:128%;padding-bottom:128%;border-radius:50%;z-index:0;
   /* Long, many-stepped falloff so the pearl dissolves into the ivory
@@ -332,7 +332,7 @@ h5{font-size:1rem}
 }
 @keyframes cue{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
 
-/* Sub-page hero — compact, dark */
+/* Sub-page hero: compact, dark */
 .page-hero{
   background:var(--ink);color:rgba(230,238,252,.8);
   padding:118px 0 104px;position:relative;overflow:hidden;
@@ -383,8 +383,9 @@ h5{font-size:1rem}
 .stat:hover::after{transform:scaleX(1)}
 .stat__num{
   font-family:var(--serif);font-size:clamp(2.1rem,3.8vw,3.1rem);font-weight:600;
-  color:var(--ink);line-height:.94;letter-spacing:-.045em;display:block;margin-bottom:14px;
-  font-variation-settings:'SOFT' 0,'WONK' 0;
+  color:var(--ink);line-height:.95;letter-spacing:-.038em;display:block;margin-bottom:14px;
+  font-variant-numeric:tabular-nums;
+  font-feature-settings:'tnum' 1;
 }
 .stat__num small{font-size:.4em;font-weight:600;letter-spacing:-.01em;color:var(--cobalt)}
 .stat__label{font-size:.85rem;color:var(--text);line-height:1.5;margin:0}
@@ -433,15 +434,35 @@ h5{font-size:1rem}
 .section--navy .iconbox__icon{background:rgba(159,198,241,.14);color:var(--sky)}
 .section--navy .iconbox:hover .iconbox__icon{background:var(--sky);color:var(--ink)}
 
+.iconbox__year{
+  font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--cobalt);margin:0 0 14px;
+}
+.section--navy .iconbox__year{color:var(--sky)}
 .iconbox__num{
   font-family:var(--serif);font-size:1.05rem;font-weight:600;color:var(--cobalt);
   width:40px;height:40px;border:1px solid var(--line-2);border-radius:50%;
   display:flex;align-items:center;justify-content:center;margin-bottom:22px;flex:0 0 auto;
   transition:all .4s var(--ease);
 }
-.iconbox:hover .iconbox__num{background:var(--cobalt);border-color:var(--cobalt);color:#fff}
-.section--navy .iconbox__num{color:var(--sky);border-color:var(--line-dark)}
-.section--navy .iconbox:hover .iconbox__num{background:var(--sky);border-color:var(--sky);color:var(--ink)}
+.iconbox:hover .iconbox__year{
+  font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--cobalt);margin:0 0 14px;
+}
+.section--navy .iconbox__year{color:var(--sky)}
+.iconbox__num{background:var(--cobalt);border-color:var(--cobalt);color:#fff}
+.section--navy .iconbox__year{
+  font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--cobalt);margin:0 0 14px;
+}
+.section--navy .iconbox__year{color:var(--sky)}
+.iconbox__num{color:var(--sky);border-color:var(--line-dark)}
+.section--navy .iconbox:hover .iconbox__year{
+  font-family:var(--sans);font-size:.7rem;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--cobalt);margin:0 0 14px;
+}
+.section--navy .iconbox__year{color:var(--sky)}
+.iconbox__num{background:var(--sky);border-color:var(--sky);color:var(--ink)}
 
 /* ---------- 11. Flow diagram ---------- */
 .flow{display:flex;flex-wrap:wrap;align-items:stretch;justify-content:center}
@@ -522,6 +543,8 @@ h5{font-size:1rem}
 .timeline::before{
   content:"";position:absolute;left:25px;top:16px;bottom:16px;width:1.5px;
   background:linear-gradient(180deg,var(--cobalt),var(--blue-soft) 55%,rgba(159,198,241,.12));
+  /* Defaults to fully drawn; animations.js scrubs it from 0 as you scroll. */
+  transform:scaleY(var(--tl-scale,1));transform-origin:top center;
 }
 .tl-item{display:flex;gap:30px;position:relative;padding-bottom:52px}
 .tl-item:last-child{padding-bottom:0}
@@ -581,16 +604,13 @@ h5{font-size:1rem}
 .fund__head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:11px}
 .fund__label{font-weight:600;color:var(--ink);font-size:1rem}
 .fund__pct{
-  font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--cobalt);line-height:1;
-  font-variation-settings:'SOFT' 0,'WONK' 0;
+  font-family:var(--serif);font-size:1.48rem;font-weight:600;color:var(--cobalt);line-height:1;
 }
 .fund__track{height:6px;background:var(--line);border-radius:99px;overflow:hidden}
 .fund__fill{
-  height:100%;border-radius:99px;width:0;
+  display:block;height:100%;border-radius:99px;
   background:linear-gradient(90deg,var(--cobalt),var(--blue-soft));
-  transition:width 1.4s var(--ease-io);
 }
-.is-visible .fund__fill{width:var(--w)}
 .fund__note{font-size:.875rem;color:var(--text);margin:11px 0 0}
 .section--navy .fund__label{color:#fff}
 .section--navy .fund__track{background:rgba(159,198,241,.16)}
@@ -628,8 +648,7 @@ h5{font-size:1rem}
 .quote-band__inner{position:relative;z-index:1;text-align:center;max-width:960px;margin:0 auto}
 .quote-band blockquote{
   margin:0;font-family:var(--serif);font-size:clamp(1.9rem,4.6vw,3.6rem);
-  line-height:1.1;letter-spacing:-.038em;color:#fff;font-weight:500;
-  font-variation-settings:'SOFT' 0,'WONK' 1;
+  line-height:1.12;letter-spacing:-.03em;color:#fff;font-weight:600;
 }
 .quote-band cite{
   display:block;margin-top:34px;font-style:normal;font-size:.72rem;letter-spacing:.2em;
@@ -642,7 +661,7 @@ h5{font-size:1rem}
 }
 .pullquote p{
   font-family:var(--serif);font-size:clamp(1.35rem,2.6vw,1.95rem);line-height:1.28;
-  color:var(--ink);letter-spacing:-.03em;margin:0;font-variation-settings:'SOFT' 0,'WONK' 1;
+  color:var(--ink);letter-spacing:-.024em;margin:0;font-weight:600;
 }
 .pullquote cite{display:block;margin-top:18px;font-style:normal;font-size:.76rem;color:var(--muted);letter-spacing:.09em;text-transform:uppercase;font-weight:600}
 
@@ -676,7 +695,7 @@ h5{font-size:1rem}
 .media-ratio--square img{aspect-ratio:1/1}
 .media-ratio--tall img{aspect-ratio:3/4}
 
-/* Cobalt duotone — unifies stock and field photography into one brand look */
+/* Cobalt duotone: unifies stock and field photography into one brand look */
 .duotone{position:relative;background:var(--cobalt);isolation:isolate}
 .duotone img{mix-blend-mode:luminosity;opacity:.92}
 .duotone::after{
@@ -865,27 +884,22 @@ h5{font-size:1rem}
   font-size:.78rem;color:rgba(230,238,252,.55);
 }
 
-/* ---------- 26. Scroll reveal ---------- */
-.js .reveal{
-  opacity:0;transform:translateY(26px);
-  transition:opacity .9s var(--ease),transform .9s var(--ease);
-  transition-delay:var(--d,0ms);
-}
-.reveal.is-visible{opacity:1;transform:none}
-/* A revealed row animates its columns in sequence rather than as one block. */
-.js .row.reveal{opacity:1;transform:none;transition:none}
-.js .row.reveal > [class^="col"]{
-  opacity:0;transform:translateY(26px);
-  transition:opacity .9s var(--ease),transform .9s var(--ease);
-  transition-delay:var(--d,0ms);
-}
-.row.reveal.is-visible > [class^="col"]{opacity:1;transform:none}
-.stat__num{font-variant-numeric:tabular-nums}
+/* ---------- 26. Motion ----------
+   Nothing here hides content. GSAP sets the "before" state at runtime via
+   gsap.set(), so if the CDN fails or scripting is off the page renders whole. */
+
+/* Word-level headline split, built by animations.js */
+.split .word{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.14em;margin-bottom:-.14em}
+.split .word__i{display:inline-block;will-change:transform}
+
+/* Default state: filled. GSAP animates from zero when it is present. */
+.fund__fill{width:var(--w)}
+
+.hero__media img,.hero__glow{will-change:transform}
+
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .js .reveal{opacity:1;transform:none;transition:none}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
-  .is-visible .fund__fill{transition:none}
   .marquee__track{animation:none}
   .hero__glow{animation:none}
 }

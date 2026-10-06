@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-PearlOxy Uganda Limited — static site builder.
+PearlOxy Uganda Limited static site builder.
 
 Wraps each body partial in src/ with the shared <head>, header and footer so
 metadata, navigation and the footer can never drift between pages.
@@ -46,7 +46,7 @@ PAGES = [
         "desc": "The MPOS device stores oxygen while power is available and automatically "
                 "supplies up to 3 patients for up to 2 hours during power interruptions.",
         "og": "mpos-device-hero.png",
-        "h1": "MPOS — the portable oxygen safety net for any hospital",
+        "h1": "MPOS: the portable oxygen safety net for any hospital",
     },
     {
         "slug": "impact", "file": "impact", "nav": "impact",
@@ -139,8 +139,8 @@ HEAD = """<!DOCTYPE html>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3CradialGradient id='g' cx='32%25' cy='30%25'%3E%3Cstop offset='0' stop-color='%237FE3F5'/%3E%3Cstop offset='.32' stop-color='%2322C7E0'/%3E%3Cstop offset='.64' stop-color='%230B7FD4'/%3E%3Cstop offset='1' stop-color='%23064F86'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='15' fill='url(%23g)'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..700,0..100,0..1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script>document.documentElement.className+=' js';</script>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}assets/css/main.css">
 <script type="application/ld+json">{jsonld}</script>
 </head>
@@ -151,8 +151,8 @@ HEAD = """<!DOCTYPE html>
 HEADER = """<header class="site-header">
   <div class="container">
     <div class="header-inner">
-      <a class="brand" href="{root}index.html" aria-label="PearlOxy Uganda Limited — home">
-        <img src="{root}assets/img/pearloxy-logo-mark.png" alt="PearlOxy — The Future of Oxygen Storage" width="750" height="175">
+      <a class="brand" href="{root}index.html" aria-label="PearlOxy Uganda Limited, home">
+        <img src="{root}assets/img/pearloxy-logo-mark.png" alt="PearlOxy, The Future of Oxygen Storage" width="750" height="175">
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation menu">
         <span></span><span></span><span></span>
@@ -176,7 +176,7 @@ FOOTER = """</main>
     <div class="row row--gap">
       <div class="col-4 footer-about">
         <a class="brand" href="{root}index.html">
-          <img src="{root}assets/img/pearloxy-logo-light.png" alt="PearlOxy — The Future of Oxygen Storage" width="750" height="175">
+          <img src="{root}assets/img/pearloxy-logo-light.png" alt="PearlOxy, The Future of Oxygen Storage" width="750" height="175">
         </a>
         <p>Portable oxygen backup technology, locally built in Kampala, designed to keep
           oxygen therapy flowing when power fails.</p>
@@ -223,7 +223,10 @@ FOOTER = """</main>
     </div>
   </div>
 </footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="{root}assets/js/main.js" defer></script>
+<script src="{root}assets/js/animations.js" defer></script>
 </body>
 </html>
 """
@@ -239,7 +242,7 @@ JSONLD = """{{
 "description":"PearlOxy develops the MPOS device, a portable oxygen buffer that keeps oxygen therapy flowing during power outages in low-resource hospitals.",
 "address":{{"@type":"PostalAddress","addressLocality":"Kampala","addressCountry":"UG"}},
 "sameAs":["{linkedin}"],
-"makesOffer":{{"@type":"Offer","itemOffered":{{"@type":"Product","name":"MPOS — Mobile Portable Oxygen Storage","description":"Uninterruptible oxygen supply system that stores oxygen while power is available and delivers it to up to 3 patients for up to 2 hours during power interruptions."}},"price":"2000","priceCurrency":"USD"}}
+"makesOffer":{{"@type":"Offer","itemOffered":{{"@type":"Product","name":"MPOS, Mobile Portable Oxygen Storage","description":"Uninterruptible oxygen supply system that stores oxygen while power is available and delivers it to up to 3 patients for up to 2 hours during power interruptions."}},"price":"2000","priceCurrency":"USD"}}
 }}"""
 
 
